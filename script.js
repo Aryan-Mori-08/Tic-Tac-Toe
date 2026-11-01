@@ -5,8 +5,7 @@ let newGameBtn = document.querySelector(".newGame-btn");
 let msgContainer = document.querySelector(".msg-container");
 let turn0 = true;
 
-
-
+// below are the finite winning patterns to win a game 
 const winningPatterns = [
     [0,1,2],
     [0,3,6],
@@ -18,6 +17,7 @@ const winningPatterns = [
     [2,4,6]
 ];
 
+// function which has logic to reset the game 
 const resetGame = () =>{
     msgContainer.classList.add("hide");
     turn0 = true;
@@ -27,6 +27,7 @@ const resetGame = () =>{
     }
 }
 
+// function which has logic to disable boxes once when clicked by the user 
 const disableBoxes = () =>{
     for(let btn of box){
         btn.disabled =true;
@@ -36,6 +37,7 @@ const disableBoxes = () =>{
 resetBtn.addEventListener("click", resetGame);
 newGameBtn.addEventListener("click", resetGame);
 
+// function which checks which user won the game 
 const checkWinner = () =>{
     for(pattern of winningPatterns){
         let p1 = box[pattern[0]].innerText;
@@ -53,6 +55,7 @@ const checkWinner = () =>{
     }
 }
 
+// it has the logic of all buttons when they are clicked 
 for(let btn of box){
     btn.addEventListener("click", ()=>{
         if(turn0){
