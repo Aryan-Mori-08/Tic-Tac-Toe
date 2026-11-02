@@ -4,6 +4,7 @@ let winner = document.querySelector("#winner");
 let newGameBtn = document.querySelector(".newGame-btn");
 let msgContainer = document.querySelector(".msg-container");
 let turn0 = true;
+let drawcounter = 0;
 
 // below are the finite winning patterns to win a game 
 const winningPatterns = [
@@ -34,6 +35,15 @@ const disableBoxes = () =>{
     }
 }
 
+
+const checkDraw = () =>{
+    if(drawcounter==9){
+        // console.log("Game Draw");
+        msgContainer.classList.remove("hide");
+        winner.innerText = "Game Draw";
+    }
+}
+
 resetBtn.addEventListener("click", resetGame);
 newGameBtn.addEventListener("click", resetGame);
 
@@ -50,19 +60,24 @@ const checkWinner = () =>{
                 msgContainer.classList.remove("hide");
                 disableBoxes();
                 
+            }else{
+                checkDraw();
             }
         }
     }
+    
 }
 
 // it has the logic of all buttons when they are clicked 
 for(let btn of box){
     btn.addEventListener("click", ()=>{
         if(turn0){
+            drawcounter += 1;
             btn.innerText = "O";
             turn0 = false;
             
         }else{
+            drawcounter += 1;
             btn.innerText = "X";
             turn0 = true;
             
@@ -71,5 +86,7 @@ for(let btn of box){
         checkWinner();
     })
 }
+
+
 
 
